@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -13,7 +14,7 @@ class Recipes(models.Model):
     title = models.CharField(max_length=150, verbose_name='Название')
     content = models.TextField(blank=True, verbose_name='Описание')
     step = models.TextField(blank=True, verbose_name='Шаги приготовления')
-    time = models.DateTimeField(verbose_name='Время приготовления')
+    time = models.IntegerField(verbose_name='Время приготовления', default=1, validators=[MinValueValidator(1)])
     photo = models.ImageField(upload_to='photos/%Y/%m/%d', verbose_name='Изображение', blank=True)
     author = models.CharField(max_length=150, verbose_name='Автор')
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
@@ -23,9 +24,9 @@ class Recipes(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = 'Новость'
-        verbose_name_plural = 'Новости'
-        ordering = ['created_at']  # сортировка
+        verbose_name = 'Рецепт'
+        verbose_name_plural = 'Рецепты'
+        ordering = ['category']  # сортировка
 
 
 class Category(models.Model):
