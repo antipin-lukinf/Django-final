@@ -15,7 +15,7 @@ class Recipes(models.Model):
     content = models.TextField(blank=True, verbose_name='Описание')
     step = models.TextField(blank=True, verbose_name='Шаги приготовления')
     time = models.IntegerField(verbose_name='Время приготовления', default=1, validators=[MinValueValidator(1)])
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d', verbose_name='Изображение', blank=True)
+    photo = models.ImageField(upload_to='photos', verbose_name='Изображение', blank=True)
     author = models.CharField(max_length=150, verbose_name='Автор')
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name='Категория')
